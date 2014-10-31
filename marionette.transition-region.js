@@ -23,7 +23,7 @@
     // you will be some sort of mixin for a region.
     setQueue: function(view, options) {
       this._queuedView = view;
-      this._queueOptions = options;
+      this._queuedOptions = options;
     },
 
     setInQueue: function(view, options) {
