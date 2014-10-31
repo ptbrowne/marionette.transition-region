@@ -156,7 +156,7 @@
 
       // Only hide the view if we want to animate it
       if (animatingIn) {
-        var transitionInCss = view.transitionInCss || this.transitionInCss;
+        var transitionInCss = view.transitionInCss;
         var props = _.isFunction(transitionInCss) ? transitionInCss(options) : transitionInCss;
         view.$el.css(props);
       }
