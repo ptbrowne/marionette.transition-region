@@ -11,16 +11,8 @@
  */
 
 (function() {
-  Marionette.TransitionRegion = Marionette.Region.extend({
-    transitionInCss: {
-      opacity: 0
-    },
 
-    concurrentTransition: false,
-
-    // This is queue manager code that doesn't belong in regions.
-    // maybe when this transition region is in Marionette,
-    // you will be some sort of mixin for a region.
+  var QueueMixin = {
     setQueue: function(view, options) {
       this._queuedView = view;
       this._queuedOptions = options;
@@ -52,7 +44,12 @@
     clearQueue: function() {
       delete this._queuedView;
       delete this._queuedOptions;
-    },
+    }
+  };
+
+  Marionette.TransitionRegion = Marionette.Region.extend({
+
+    concurrentTransition: false,
 
     show: function(view, options) {
 
@@ -252,4 +249,5 @@
       delete this.currentView;
     },
   });
+  _.extend(Marionette.TransitionRegion.prototype, QueueMixin);
 })();
