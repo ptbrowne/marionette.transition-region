@@ -83,30 +83,30 @@
       // Otherwise, simply continue.
       if (animateOut && !concurrent) {
         this.listenToOnce(currentView, 'animateOut', _.bind(this._onTransitionOut, this));
-        currentView.animateOut();
+        currentView.animateOut(options);
         // Return this for backwards compat
         return this;
       }
 
       // Otherwise, execute both transitions at the same time
       else if (animateOut && concurrent) {
-        currentView.animateOut();
-        return this._onTransitionOut();
+        currentView.animateOut(options);
+        return this._onTransitionOut(options);
       }
 
       else {
-        return this._onTransitionOut();
+        return this._onTransitionOut(options);
       }
     },
 
     // This is most of the original show function.
-    _onTransitionOut: function() {
+    _onTransitionOut: function(options) {
       this.triggerMethod('animateOut', this.currentView);
 
       var view = this._inQueueView;
       var options = this._inQueueOptions;
       this._clearInQueue();
-      
+
       // This is the last time to update what view is about to be shown.
       // At this point, any subsequent shows will cause a brand new animation phase
       // to commence.
@@ -184,7 +184,7 @@
       // If there's an animateIn method, then call it and wait for it to complete
       if (animatingIn) {
         this.listenToOnce(view, 'animateIn', _.bind(this._onTransitionIn, this, showOptions));
-        view.animateIn();
+        view.animateIn(options);
         return this;
       }
 
