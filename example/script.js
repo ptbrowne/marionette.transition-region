@@ -169,9 +169,10 @@
     transitionInCss: function (options) {
       options = options || {};
       var delta = options.backwards ? -500 : 500;
+      var skew = options.backwards ? 30 : -30;
       return {
         position: 'absolute',
-        transform: 'translateX(' + delta + 'px)'
+        transform: 'translateX(' + delta + 'px) skew(' + skew + 'deg, 0deg)'
       }
     },
 
@@ -181,7 +182,7 @@
       options = options || {};
       this.$el.width(); // trigger a repaint ><
       this.$el.css({
-        transform: 'translateX(0)'
+        transform: 'translateX(0) skew(0deg, 0deg)'
       });
       setTimeout(_.bind(this.trigger, this, 'animateIn'), ANIMATION_DURATION)
     },
@@ -190,9 +191,10 @@
     animateOut: function(options) {
       options = options || {};
       var delta = options.backwards ? 500 : -500;
+      var skew = options.backwards ? 30 : -30;
       this.$el.width(); // trigger a repaint ><
       this.$el.css({
-        transform: 'translateX(' + delta + 'px)'
+        transform: 'translateX(' + delta + 'px) skew(' + skew + 'deg, 0deg)'
       });
       setTimeout(_.bind(this.trigger, this, 'animateOut'), ANIMATION_DURATION);
     }
